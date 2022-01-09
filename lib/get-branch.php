@@ -12,7 +12,7 @@ $t = $text['get-branch'];
 <!DOCTYPE html>
 <html>
 <head>
-<title>ICEcoder <?php echo $ICEcoder["versionNo"];?> get branch</title>
+<title>Abdomen <?php echo $ICEcoder["versionNo"];?> get branch</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="robots" content="noindex, nofollow">
 </head>

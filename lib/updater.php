@@ -7,7 +7,7 @@ $t = $text['updater'];
 ?>
 <!DOCTYPE html>
 <head>
-<title>Updating ICEcoder...</title>
+<title>Updating Abdomen...</title>
 </head>
 
 <body style="background: #181817; color: #fff; font-size: 10px; font-family: arial, helvetica, swiss, verdana">
@@ -19,7 +19,7 @@ function startUpdate() {
 	// First, check old version is entirely moveable
 	$source = "../";
 	$cantMoveArray = array();
-	echo 'Checking we can entirely move old ICEcoder version...<br>';
+	echo 'Checking we can entirely move old Abdomen version...<br>';
 	foreach ($iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),RecursiveIteratorIterator::SELF_FIRST) as $item) {
 		if (strpos($source.DIRECTORY_SEPARATOR.$iterator->getSubPathName(),"oldVersion")==false) {
 			// Don't move backups, plugins or .git away
@@ -33,11 +33,11 @@ function startUpdate() {
 		}
 	}
 	if (count($cantMoveArray) > 0) {
-		echo '<br>Sorry, there are dirs/files that cannot be moved. Please set write permissions on them so ICEcoder may move the old version, to make way for the new.<br><br>You can reload this page after making perms changes to check the list again.<br><br>';
+		echo '<br>Sorry, there are dirs/files that cannot be moved. Please set write permissions on them so Abdomen may move the old version, to make way for the new.<br><br>You can reload this page after making perms changes to check the list again.<br><br>';
 		for ($i=0; $i<count($cantMoveArray); $i++) {
 			echo $cantMoveArray[$i]."<br>";
 		}
-		die('<br><a href="'.$source.'" style="color: #fff">&lt;&lt; Back to ICEcoder</a>');
+		die('<br><a href="'.$source.'" style="color: #fff">&lt;&lt; Back to Abdomen</a>');
 	}
 	renameOldVersion();
 }
@@ -58,7 +58,7 @@ function copyOldVersion() {
 	$source = "../";
 	$dest = PATH;
 
-	echo 'Moving current ICEcoder files...<br>';
+	echo 'Moving current Abdomen files...<br>';
 	foreach ($iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS),RecursiveIteratorIterator::SELF_FIRST) as $item) {
 		if (strpos($source.DIRECTORY_SEPARATOR.$iterator->getSubPathName(),"oldVersion")==false) {
 			// Don't move backups, plugins or .git away
@@ -74,18 +74,18 @@ function copyOldVersion() {
 		}
 	}
 	$icvURL = "https://icecoder.net/latest-version.txt";
-	echo 'Detecting current version of ICEcoder...<br>';
+	echo 'Detecting current version of Abdomen...<br>';
 	$icvInfo = getData($icvURL,'curl','Sorry, couldn\'t figure out latest version.');
-	echo 'Latest version of ICEcoder is '.$icvInfo.'<br>';
+	echo 'Latest version of Abdomen is '.$icvInfo.'<br>';
 	openZipNew($icvInfo);
 }
 
 function openZipNew($icvInfo) {
-	echo 'Retrieving zip from ICEcoder site...<br>';
-	$source = 'ICEcoder '.$icvInfo;
+	echo 'Retrieving zip from Abdomen site...<br>';
+	$source = 'Abdomen '.$icvInfo;
 	$target = '../';
 
-	$remoteFile = 'https://icecoder.net/ICEcoder-'.(str_replace(" beta", "-beta",$icvInfo)).'.zip';
+	$remoteFile = 'https://icercoder.net/icecoder-'.(str_replace(" beta", "-beta",$icvInfo)).'.zip';
     	$file = "../tmp/new-version.zip";
 	$fileData = getData($remoteFile,'curl','Sorry, couldn\'t get latest version zip file.');
 	echo 'Storing zip file...<br>';
@@ -203,12 +203,12 @@ function copyOverSettings($icvInfo) {
 startUpdate();
 if ($updateDone) {
 	echo 'Updated successfully!<br><br>';
-	echo 'Restarting ICEcoder...';
+	echo 'Restarting Abdomen...';
 	echo '<script>alert("'.$t['Update appears to...'].'");window.location = "../?display=updated&csrf='.$_SESSION["csrf"].'";</script>';
 } else {
 	echo 'Something appears to have gone wrong :-/<br><br>';
-	echo 'Please report bugs at <a href=\"https://github.com/icecoder/ICEcoder\" style=\"color: #fff\">https://github.com/icecoder/ICEcoder</a><br><br>';
-	echo 'You can recover the old version from ICEcoder\'s tmp dir';
+	echo 'Please report bugs at <a href=\"https://github.com/okavatti/Abdomen\" style=\"color: #fff\">https://github.com/okavatti/Abdomen</a><br><br>';
+	echo 'You can recover the old version from Abdomen\'s tmp dir';
 }
 ?>
 </body>
